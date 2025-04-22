@@ -1,8 +1,7 @@
-
 import { toast } from 'sonner';
-import { User, LoginCredentials, RegisterCredentials } from '../types/auth';
+import { AppUser, LoginCredentials, RegisterCredentials } from '../types/auth';
 
-const mockUsers: User[] = [
+const mockUsers: AppUser[] = [
   {
     id: '1',
     email: 'admin@finconnect.com',
@@ -22,14 +21,14 @@ const mockUsers: User[] = [
 ];
 
 // Mock token generator
-const generateToken = (user: User): string => {
+const generateToken = (user: AppUser): string => {
   return `mock-jwt-token-${user.id}-${user.role}`;
 }
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const api = {
-  async login(credentials: LoginCredentials): Promise<{ user: User, token: string }> {
+  async login(credentials: LoginCredentials): Promise<{ user: AppUser, token: string }> {
     // Simulate API delay
     await delay(1000);
 
@@ -46,7 +45,7 @@ export const api = {
     return { user, token };
   },
   
-  async register(credentials: RegisterCredentials): Promise<{ user: User, token: string }> {
+  async register(credentials: RegisterCredentials): Promise<{ user: AppUser, token: string }> {
     // Simulate API delay
     await delay(1000);
     
@@ -56,7 +55,7 @@ export const api = {
     }
     
     // Create new user
-    const newUser: User = {
+    const newUser: AppUser = {
       id: String(mockUsers.length + 1),
       email: credentials.email,
       name: credentials.name,
@@ -71,7 +70,7 @@ export const api = {
     return { user: newUser, token };
   },
   
-  async getCurrentUser(token: string): Promise<User> {
+  async getCurrentUser(token: string): Promise<AppUser> {
     // Simulate API delay
     await delay(500);
     
@@ -91,7 +90,7 @@ export const api = {
     return user;
   },
   
-  async subscribeUser(userId: string, tier: string): Promise<User> {
+  async subscribeUser(userId: string, tier: string): Promise<AppUser> {
     // Simulate API delay
     await delay(1000);
     
