@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
-import { Dashboard, Package, Settings, User, Users } from 'lucide-react';
+import { LayoutDashboard, Package, Settings, User, Users } from 'lucide-react';
 
 interface SidebarItemProps {
   to: string;
@@ -67,7 +67,7 @@ const Sidebar: React.FC = () => {
         <ul className="space-y-1">
           <SidebarItem
             to="/dashboard"
-            icon={<Dashboard className="w-5 h-5" />}
+            icon={<LayoutDashboard className="w-5 h-5" />}
             label="Dashboard"
             active={location.pathname === '/dashboard'}
           />
