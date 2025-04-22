@@ -1,14 +1,14 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { supabase } from '../lib/supabase';
 import { User, AuthState, LoginCredentials, RegisterCredentials } from '../types/auth';
-import { api } from '../services/api';
 
 interface AuthContextProps {
   authState: AuthState;
   login: (credentials: LoginCredentials) => Promise<void>;
   register: (credentials: RegisterCredentials) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   logout: () => void;
   updateUser: (user: User) => void;
 }
@@ -144,9 +144,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       user
     }));
   };
-  
+
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`,
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error) {
+      console.error('Google sign in error:', error);
+      toast.error('Failed to sign in with Google. Please try again.');
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ authState, login, register, logout, updateUser }}>
+    <AuthContext.Provider value={{ 
+      authState, 
+      login, 
+      register, 
+      signInWithGoogle, 
+      logout, 
+      updateUser 
+    }}>
       {children}
     </AuthContext.Provider>
   );
