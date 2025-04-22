@@ -1,193 +1,203 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import Navbar from '@/components/layout/Navbar';
-import { CheckCircle, ChevronRight } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import Navbar from "@/components/layout/Navbar";
+import { CheckCircle, ChevronRight } from "lucide-react";
 
+/**
+ * Home/Landing page for FinConnect.
+ * UI has been upgraded for a more modern, professional look:
+ * - Larger type, improved color, better card visual treatment, more white space.
+ */
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-[#f5f8ff] via-[#f2f4fa] to-[#e9eaf7] text-gray-900">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <section className="pt-20 pb-12 md:pt-32 md:pb-24">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="flex flex-col items-center text-center space-y-4 mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-gray-900 max-w-3xl">
-              Powerful Financial APIs for Modern Applications
+      <section className="pt-24 pb-16 md:pt-36 md:pb-28 relative">
+        <div className="container px-4 md:px-8 mx-auto">
+          <div className="flex flex-col items-center text-center space-y-4 mb-10">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-lg">
+              Powerful Financial APIs for Modern Businesses
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl">
-              Connect, integrate, and build financial applications with our comprehensive API solutions
+            <p className="text-2xl text-gray-700 max-w-2xl mt-2">
+              Connect, integrate, and build with best-in-class financial APIs and dev tools.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-6">
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all text-base sm:px-8"
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-base rounded-full shadow-lg px-10 py-4 font-semibold transition-all"
               >
                 <Link to="/register">Get Started</Link>
               </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="border-gray-300 hover:bg-gray-50 text-base sm:px-8"
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-gray-300 hover:bg-gray-100 text-base rounded-full px-10 py-4 transition-all"
               >
                 <Link to="/login" className="flex items-center">
-                  Sign In <ChevronRight className="ml-2 h-4 w-4" />
+                  Sign In <ChevronRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>
           </div>
-          
-          <div className="relative mx-auto mt-12 max-w-5xl rounded-xl shadow-xl overflow-hidden">
-            <div className="aspect-video bg-gray-900 flex items-center justify-center text-white">
-              <p className="text-xl">Dashboard Preview</p>
+          <div className="relative mx-auto mt-12 max-w-5xl rounded-2xl shadow-xl overflow-hidden border border-blue-100 bg-white/80 backdrop-blur-2xl">
+            <div className="aspect-video bg-gradient-to-tr from-blue-700/90 via-indigo-700/80 to-blue-400/90 flex items-center justify-center text-white border-0">
+              <p className="text-2xl font-semibold opacity-90">Dashboard Preview</p>
             </div>
           </div>
         </div>
+        {/* Decorative circles */}
+        <div className="absolute -top-24 -left-24 w-56 h-56 rounded-full bg-gradient-to-tr from-blue-200 via-indigo-200 to-transparent opacity-60 blur-3xl z-0" />
+        <div className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-gradient-to-bl from-indigo-200 via-purple-200 to-transparent opacity-50 blur-3xl z-0" />
       </section>
-      
+
       {/* Features Section */}
-      <section className="py-16 bg-white">
-        <div className="container px-4 md:px-6 mx-auto">
+      <section className="py-20 bg-gradient-to-br from-white via-blue-50 to-white">
+        <div className="container px-4 md:px-8 mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Key Features</h2>
+            <h2 className="text-4xl font-bold text-blue-900">Key Features</h2>
             <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-              Everything you need to build modern financial applications
+              All the essentials for building modern financial experiences
             </p>
           </div>
-          
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'Payments API',
-                description: 'Process payments securely with our comprehensive payments API',
-                icon: '💳',
+                title: "Payments API",
+                description: "Process payments securely with our comprehensive payments API.",
+                icon: "💳",
               },
               {
-                title: 'Data Analytics',
-                description: 'Gain insights from financial data with powerful analytics tools',
-                icon: '📊',
+                title: "Data Analytics",
+                description: "Gain insights from financial data with powerful analytics tools.",
+                icon: "📊",
               },
               {
-                title: 'Security & Compliance',
-                description: 'Enterprise-grade security with built-in compliance features',
-                icon: '🔒',
+                title: "Security & Compliance",
+                description: "Enterprise-grade security and built-in compliance features.",
+                icon: "🔒",
               },
               {
-                title: 'Scalable Infrastructure',
-                description: 'Built to scale with your business needs and growth',
-                icon: '🚀',
+                title: "Scalable Infrastructure",
+                description: "Built to scale with your needs and growth.",
+                icon: "🚀",
               },
               {
-                title: 'Easy Integration',
-                description: 'Simple to integrate with your existing applications and systems',
-                icon: '🔌',
+                title: "Easy Integration",
+                description: "Integrate quickly with your existing applications.",
+                icon: "🔌",
               },
               {
-                title: 'Developer Tools',
-                description: 'Comprehensive documentation and developer-friendly tools',
-                icon: '🛠️',
+                title: "Developer Tools",
+                description: "Great documentation and developer-friendly tooling.",
+                icon: "🛠️",
               },
             ].map((feature, index) => (
-              <div key={index} className="bg-gradient-to-b from-gray-50 to-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+              <div key={index} className="bg-white/80 hover:bg-white shadow-lg rounded-2xl p-10 border border-gray-100 transition-all relative overflow-hidden">
+                <div className="absolute -top-6 -right-6 text-7xl opacity-10 select-none pointer-events-none">
+                  {feature.icon}
+                </div>
+                <div className="text-4xl mb-5">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-700">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-      
+
       {/* Pricing Section */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900">Pricing Plans</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the perfect plan for your business needs
+      <section className="py-20 bg-gradient-to-b from-blue-50 to-gray-100">
+        <div className="container px-4 md:px-8 mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-blue-900">Pricing Plans</h2>
+            <p className="mt-3 text-xl text-gray-600 max-w-2xl mx-auto">
+              Flexible plans tailored for every team and business size.
             </p>
           </div>
-          
-          <div className="grid gap-8 lg:grid-cols-3 max-w-5xl mx-auto">
+          <div className="grid gap-10 lg:grid-cols-3 max-w-5xl mx-auto">
             {[
               {
-                name: 'Basic',
-                price: '$29',
-                description: 'Perfect for startups and small projects',
+                name: "Basic",
+                price: "$29",
+                description: "Perfect for startups and small projects.",
                 features: [
-                  'Up to 50,000 API calls per month',
-                  '5 API keys',
-                  'Email support',
-                  'Basic analytics dashboard',
-                  'Standard rate limits',
+                  "Up to 50,000 API calls/month",
+                  "5 API keys",
+                  "Email support",
+                  "Basic analytics dashboard",
+                  "Standard rate limits",
                 ],
               },
               {
-                name: 'Premium',
-                price: '$99',
-                description: 'For growing businesses with advanced needs',
+                name: "Premium",
+                price: "$99",
+                description: "For growing businesses that need more.",
                 features: [
-                  'Up to 500,000 API calls per month',
-                  '20 API keys',
-                  'Priority email support',
-                  'Advanced analytics dashboard',
-                  'Higher rate limits',
-                  'Webhook integrations',
+                  "Up to 500,000 API calls/month",
+                  "20 API keys",
+                  "Priority support",
+                  "Advanced analytics",
+                  "Higher rate limits",
+                  "Webhook integrations",
                 ],
                 highlighted: true,
               },
               {
-                name: 'Enterprise',
-                price: '$299',
-                description: 'For large scale operations and custom requirements',
+                name: "Enterprise",
+                price: "$299",
+                description: "Custom, robust solutions for scale.",
                 features: [
-                  'Unlimited API calls',
-                  'Unlimited API keys',
-                  'Dedicated support manager',
-                  'Full analytics suite',
-                  'Unlimited rate limits',
-                  'Custom integrations',
-                  'SLA guarantees',
+                  "Unlimited API calls",
+                  "Unlimited API keys",
+                  "Dedicated support",
+                  "Full analytics suite",
+                  "Unlimited rate limits",
+                  "Custom integrations",
+                  "SLA guarantees",
                 ],
               },
             ].map((plan, index) => (
-              <div 
-                key={index} 
-                className={`bg-white rounded-xl shadow-md overflow-hidden border transition-all transform hover:shadow-xl ${
-                  plan.highlighted ? 'border-blue-400 scale-105 z-10' : 'border-gray-200'
+              <div
+                key={index}
+                className={`relative bg-white/90 rounded-2xl shadow-xl overflow-hidden border-2 transition-all transform hover:shadow-2xl ${
+                  plan.highlighted
+                    ? "border-blue-400 scale-105 z-10 ring-2 ring-blue-300"
+                    : "border-gray-200"
                 }`}
               >
                 {plan.highlighted && (
-                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 text-center text-sm font-medium">
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 text-center text-sm font-semibold shadow">
                     Most Popular
                   </div>
                 )}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                  <div className="flex items-baseline mb-6">
-                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                    <span className="text-gray-600 ml-1">/month</span>
+                <div className="p-12">
+                  <h3 className="text-2xl font-bold text-blue-900 mb-2">{plan.name}</h3>
+                  <div className="flex items-center mb-4 gap-2">
+                    <span className="text-4xl font-bold text-blue-900">{plan.price}</span>
+                    <span className="text-gray-600 text-base">/month</span>
                   </div>
-                  <p className="text-gray-600 mb-6">{plan.description}</p>
-                  <ul className="space-y-3 mb-8">
+                  <p className="text-gray-700 mb-7">{plan.description}</p>
+                  <ul className="space-y-4 mb-6">
                     {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                        <span className="text-gray-600">{feature}</span>
+                      <li key={i} className="flex items-center gap-2 text-gray-700">
+                        <CheckCircle className="h-5 w-5 text-green-500" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button 
-                    asChild 
-                    className={`w-full py-6 ${
-                      plan.highlighted 
-                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' 
-                        : 'bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900'
-                    }`}
+                  <Button
+                    asChild
+                    className={`w-full py-4 rounded-full font-semibold ${
+                      plan.highlighted
+                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                        : "bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900"
+                    } shadow-md`}
                   >
                     <Link to="/register">Get Started</Link>
                   </Button>
@@ -197,41 +207,85 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="grid gap-8 md:grid-cols-4">
+      <footer className="bg-gray-900 text-white py-14">
+        <div className="container px-4 md:px-8 mx-auto">
+          <div className="grid gap-12 md:grid-cols-4">
             <div>
-              <h3 className="text-xl font-bold mb-4">FinConnect</h3>
-              <p className="text-gray-400">
-                Building the future of financial technology with powerful, accessible APIs.
+              <h3 className="text-2xl font-bold mb-3">FinConnect</h3>
+              <p className="text-gray-300">
+                Building the future of financial technology with beautiful, powerful APIs.
               </p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Products</h4>
+              <h4 className="text-lg font-semibold mb-3">Products</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Payments API</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Analytics</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Security</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Payments API
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Analytics
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Security
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Documentation
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Company</h4>
+              <h4 className="text-lg font-semibold mb-3">Company</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Careers
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Contact
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Legal</h4>
+              <h4 className="text-lg font-semibold mb-3">Legal</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Security</a></li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Terms
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition">
+                    Security
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
