@@ -1,7 +1,9 @@
 
+import { User as SupabaseUser } from '@supabase/supabase-js';
+
 export type UserRole = 'developer' | 'admin';
 
-export interface User {
+export interface AppUser {
   id: string;
   email: string;
   name: string;
@@ -12,7 +14,7 @@ export interface User {
 }
 
 export interface AuthState {
-  user: User | null;
+  user: AppUser | null;
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;

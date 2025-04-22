@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -69,11 +68,22 @@ const SubscriptionPage: React.FC = () => {
       const tier = pricingTiers.find(t => t.id === tierId);
       if (!tier) throw new Error('Invalid subscription tier');
       
-      const updatedUser = await api.subscribeUser(user.id, tier.name);
-      updateUser(updatedUser);
+      const now = new Date();
+      const subscriptionEnd = new Date(now.setMonth(now.getMonth() + 1)).toISOString();
+      
+      updateUser({
+        isSubscribed: true,
+        subscriptionTier: tier.name,
+        subscriptionEnd
+      });
+      
+      setTimeout(() => {
+        setIsSubscribing(false);
+        navigate('/dashboard');
+      }, 1500);
+      
     } catch (error) {
       console.error('Subscription error:', error);
-    } finally {
       setIsSubscribing(false);
     }
   };
@@ -86,12 +96,10 @@ const SubscriptionPage: React.FC = () => {
     );
   }
   
-  // Redirect unauthenticated users to login
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
   
-  // Redirect subscribed users to dashboard
   if (user?.isSubscribed) {
     return <Navigate to="/dashboard" replace />;
   }

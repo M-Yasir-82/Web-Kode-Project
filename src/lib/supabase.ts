@@ -1,3 +1,15 @@
 
-import { supabase } from '@/integrations/supabase/client';
-export { supabase };
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://zctpkaykssixfohmzokq.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjdHBrYXlrc3NpeGZvaG16b2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM4MjE5MDQsImV4cCI6MjAyOTM5NzkwNH0.EpXC8A5OqRGtAZVxLvGmj9_t1U4OZgMKVY04i5i3_U0';
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    storageKey: 'finconnect-auth',
+  }
+});
+
+export default supabase;

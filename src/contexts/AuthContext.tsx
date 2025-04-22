@@ -3,10 +3,11 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
-import { User } from '@supabase/supabase-js';
+import { User as SupabaseUser } from '@supabase/supabase-js';
+import { AppUser, UserRole } from '@/types/auth';
 
 interface AuthState {
-  user: User | null;
+  user: AppUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
@@ -18,9 +19,25 @@ interface AuthContextProps {
   register: (credentials: { email: string; password: string; name: string }) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
+  updateUser: (userData: Partial<AppUser>) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+
+// Function to map Supabase user to our AppUser
+const mapSupabaseUser = (supabaseUser: SupabaseUser | null): AppUser | null => {
+  if (!supabaseUser) return null;
+  
+  return {
+    id: supabaseUser.id,
+    email: supabaseUser.email || '',
+    name: supabaseUser.user_metadata?.name || supabaseUser.email?.split('@')[0] || 'User',
+    role: (supabaseUser.user_metadata?.role as UserRole) || 'developer',
+    isSubscribed: !!supabaseUser.user_metadata?.is_subscribed,
+    subscriptionTier: supabaseUser.user_metadata?.subscription_tier,
+    subscriptionEnd: supabaseUser.user_metadata?.subscription_end,
+  };
+};
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [authState, setAuthState] = useState<AuthState>({
@@ -32,12 +49,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   
   const navigate = useNavigate();
 
+  // Update user metadata
+  const updateUser = (userData: Partial<AppUser>) => {
+    if (!authState.user) return;
+    
+    setAuthState(prev => ({
+      ...prev,
+      user: { ...prev.user!, ...userData }
+    }));
+    
+    // Update user metadata in Supabase
+    supabase.auth.updateUser({
+      data: {
+        name: userData.name,
+        role: userData.role,
+        is_subscribed: userData.isSubscribed,
+        subscription_tier: userData.subscriptionTier,
+        subscription_end: userData.subscriptionEnd
+      }
+    }).catch(error => {
+      console.error('Error updating user metadata:', error);
+    });
+  };
+
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        const mappedUser = mapSupabaseUser(session?.user ?? null);
         setAuthState({
-          user: session?.user ?? null,
+          user: mappedUser,
           isAuthenticated: !!session?.user,
           isLoading: false,
           error: null
@@ -47,8 +88,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      const mappedUser = mapSupabaseUser(session?.user ?? null);
       setAuthState({
-        user: session?.user ?? null,
+        user: mappedUser,
         isAuthenticated: !!session?.user,
         isLoading: false,
         error: null
@@ -79,7 +121,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         password: credentials.password,
         options: {
           data: {
-            name: credentials.name
+            name: credentials.name,
+            role: 'developer',
+            is_subscribed: false
           }
         }
       });
@@ -129,7 +173,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       login, 
       register, 
       signInWithGoogle,
-      logout 
+      logout,
+      updateUser
     }}>
       {children}
     </AuthContext.Provider>
