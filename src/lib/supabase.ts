@@ -9,6 +9,14 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     autoRefreshToken: true,
     storageKey: 'finconnect-auth',
+  },
+  global: {
+    fetch: (...args) => {
+      return fetch(...args).catch(err => {
+        console.error('Supabase request failed:', err);
+        throw err;
+      });
+    }
   }
 });
 
