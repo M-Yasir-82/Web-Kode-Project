@@ -1,3 +1,4 @@
+
 import { toast } from 'sonner';
 import { AppUser, LoginCredentials, RegisterCredentials } from '../types/auth';
 
