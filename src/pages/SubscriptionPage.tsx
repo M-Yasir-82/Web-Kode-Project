@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import PricingCard, { PricingTier } from '@/components/subscription/PricingCard';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ const SubscriptionPage: React.FC = () => {
   const { authState, updateUser } = useAuth();
   const { isAuthenticated, isLoading, user } = authState;
   const [isSubscribing, setIsSubscribing] = useState(false);
+  const navigate = useNavigate();
   
   const pricingTiers: PricingTier[] = [
     {
