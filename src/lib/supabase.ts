@@ -11,8 +11,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     storageKey: 'finconnect-auth',
   },
   global: {
-    fetch: (...args) => {
-      return fetch(...args).catch(err => {
+    fetch: (url: RequestInfo | URL, options?: RequestInit) => {
+      return fetch(url, options).catch(err => {
         console.error('Supabase request failed:', err);
         throw err;
       });
