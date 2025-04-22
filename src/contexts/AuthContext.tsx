@@ -1,8 +1,10 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { supabase } from '../lib/supabase';
 import { User, AuthState, LoginCredentials, RegisterCredentials } from '../types/auth';
+import { api } from '../services/api';
 
 interface AuthContextProps {
   authState: AuthState;
