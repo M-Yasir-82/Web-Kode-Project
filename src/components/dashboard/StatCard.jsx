@@ -1,10 +1,11 @@
 
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * StatCard Component
+ * Modern dark glass/gradient design with accent shadows and bold visuals
+ *
  * @param {Object} props - Component props
  * @param {string} props.title - The stat title
  * @param {string|number} props.value - The stat value
@@ -22,48 +23,72 @@ const StatCard = ({
   className,
   trend,
   trendValue,
-}) => {
-  return (
-    <Card className={cn("overflow-hidden transform hover:shadow-lg transition-all duration-200", className)}>
-      <CardHeader className="flex flex-row items-center justify-between pb-2 bg-gradient-to-r from-gray-50 to-white border-b">
-        <CardTitle className="text-sm font-medium text-gray-700">{title}</CardTitle>
-        {icon && <div className="h-5 w-5 text-gray-500">{icon}</div>}
-      </CardHeader>
-      <CardContent className="p-6">
-        <div className="text-3xl font-bold text-gray-900">{value}</div>
-        {description && (
-          <p className="text-xs text-gray-500 mt-1">{description}</p>
+}) => (
+  <div
+    className={cn(
+      "relative rounded-2xl p-6 overflow-hidden shadow-xl bg-gradient-to-br from-[#23245b] via-[#292b4a] to-[#180f31] border border-purple-900/30",
+      "backdrop-blur-xl transition-transform hover:scale-[1.02]",
+      "before:absolute before:-inset-1 before:bg-gradient-to-br before:from-purple-600/20 before:to-indigo-500/10 before:rounded-2xl before:z-0",
+      className
+    )}
+    style={{ zIndex: 1 }}
+  >
+    <div className="relative z-10 flex flex-row items-center justify-between pb-2">
+      <span className="flex items-center gap-2">
+        {icon && (
+          <span className="w-7 h-7 flex items-center justify-center rounded-full bg-gradient-to-tr from-purple-700 via-indigo-600 to-blue-500 shadow-lg text-white">
+            {icon}
+          </span>
         )}
-        {trend && trendValue && (
-          <div
-            className={cn(
-              "text-xs font-medium mt-4 flex items-center",
-              trend === 'up' && "text-green-600",
-              trend === 'down' && "text-red-600",
-              trend === 'neutral' && "text-gray-600"
-            )}
-          >
-            {trend === 'up' && (
-              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path>
-              </svg>
-            )}
-            {trend === 'down' && (
-              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            )}
-            {trend === 'neutral' && (
-              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14"></path>
-              </svg>
-            )}
-            {trendValue}
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-};
+        <span className="text-xs font-bold uppercase tracking-wider text-white/80 drop-shadow">
+          {title}
+        </span>
+      </span>
+      {/* Trend tag can optionally be floated here on mobile */}
+    </div>
+    <div className="relative z-10 mt-3 mb-0">
+      <span className="text-3xl md:text-4xl font-bold drop-shadow-lg text-white/90">
+        {value}
+      </span>
+      {description && (
+        <div className="text-sm font-medium text-indigo-200/80 mt-1">
+          {description}
+        </div>
+      )}
+      {trend && trendValue && (
+        <div
+          className={cn(
+            "flex items-center mt-5 text-xs font-semibold rounded-full px-3 py-1 w-max",
+            trend === "up"
+              ? "bg-green-500/20 text-green-300"
+              : trend === "down"
+              ? "bg-red-500/20 text-red-300"
+              : "bg-white/10 text-white/80"
+          )}
+        >
+          {trend === "up" && (
+            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+          )}
+          {trend === "down" && (
+            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          )}
+          {trend === "neutral" && (
+            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14"></path>
+            </svg>
+          )}
+          {trendValue}
+        </div>
+      )}
+    </div>
+    {/* Glow effect for 3D accent */}
+    <div className="absolute -bottom-5 -right-5 w-32 h-20 rounded-full bg-gradient-to-tr from-indigo-600/40 to-purple-700/30 blur-2xl opacity-70 pointer-events-none z-0" />
+    <div className="absolute -top-5 -left-5 w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/30 to-indigo-400/10 blur-2xl opacity-60 pointer-events-none z-0" />
+  </div>
+);
 
 export default StatCard;
